@@ -10,5 +10,8 @@ public class SimpleFactoryNotificador {
     else if (tipoNotificador == 3) {
       return new PushNotification();
     }
+    else {
+      return null;
+    }
   }
 }

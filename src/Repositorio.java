@@ -11,7 +11,7 @@ public class Repositorio {
         
     }
     
-    private static Repositorio getInstance() {
+    public static Repositorio getInstance() {
         if (instance == null) {
             instance = new Repositorio();
         }
@@ -32,6 +32,10 @@ public class Repositorio {
     
     public List<Voo> getVoos() {
         return voos;
+    }
+
+    public void salvar(Voo voo) {
+        this.voos.add(voo);
     }
     
 }

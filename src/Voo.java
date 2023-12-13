@@ -44,21 +44,26 @@ public class Voo {
         this.tripulantes.forEach((tripulante) -> tripulante.notificar(message));
     }
 
-    public void mudarEstado(int tipoEstado) {
-        estado.trocarEstado(tipoEstado);
+    public void mudarEstado(int tipoEstado) throws EstadoErradoException {
+        try {
+            estado.trocarEstado(tipoEstado);    
+        } catch (EstadoErradoException e) {
+            throw e;
+        }
+        
 
     }
 
-    public adicionarTripulante(Tripulante tripulante) {
+    public void adicionarTripulante(Tripulante tripulante) {
         this.estado.adicionarTripulante(tripulante);
     }
 
-    public removerTripulante(Tripulante tripulante) {
+    public void removerTripulante(Tripulante tripulante) {
         this.estado.removerTripulante(tripulante);
     }
 
     public boolean estaCheio() {
-        return this.aeronave.quantidadeDeAssentos == this.tripulantes.size();
+        return this.aeronave.getQuantidadeDeAssentos() == this.tripulantes.size();
     }
 
     public String getId() {
@@ -69,7 +74,7 @@ public class Voo {
         this.id = id;
     }
 
-    public addTripulante(Tripulante tripulante) {
+    public void addTripulante(Tripulante tripulante) {
         this.tripulantes.add(tripulante);
     }
 
@@ -135,6 +140,14 @@ public class Voo {
 
     public void setPortaoDeEmbarque(String portaoDeEmbarque) {
         this.portaoDeEmbarque = portaoDeEmbarque;
+    }
+
+    public void trocarPortaoDeEmbarque(String portaoDeEmbarque) throws UnsupportedOperationException {
+        try {
+            this.estado.trocarPortaoDeEmbarque(portaoDeEmbarque);            
+        } catch (UnsupportedOperationException e) {
+            throw e;
+        }
     }
 
     public Aeronave getAeronave() {

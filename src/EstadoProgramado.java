@@ -11,7 +11,7 @@ public class EstadoProgramado implements Estado {
     @Override
     public void trocarEstado(int tipoEstado) throws EstadoErradoException {
         // TODO Auto-generated method stub
-        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado);
+        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado, this.voo);
         if (estado instanceof EstadoConfirmado) {
             voo.setEstado(estado);
         }
@@ -23,7 +23,7 @@ public class EstadoProgramado implements Estado {
     @Override
     public void adicionarTripulante(Tripulante tripulante) throws UnsupportedOperationException {
         // TODO Auto-generated method stub
-        voo.addTripulante();
+        voo.addTripulante(tripulante);
     }
 
     @Override

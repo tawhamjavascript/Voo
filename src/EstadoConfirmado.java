@@ -10,7 +10,7 @@ public class EstadoConfirmado implements Estado{
     @Override
     public void trocarEstado(int tipoEstado) throws EstadoErradoException {
         // TODO Auto-generated method stub
-        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado);
+        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado, this.voo);
         if (estado instanceof EstadoCancelado || estado instanceof EstadoAtrasado || estado instanceof EstadoMudancaDePortao) {
             voo.setEstado(estado);
         }
