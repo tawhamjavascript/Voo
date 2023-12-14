@@ -54,14 +54,24 @@ public class Voo {
 
     }
 
-    public void adicionarTripulante(Tripulante tripulante) {
+    public void adicionarTripulante(Tripulante tripulante) throws UnsupportedOperationException{
         this.estado.adicionarTripulante(tripulante);
     }
 
-    public void removerTripulante(Tripulante tripulante) {
+    public void removerTripulante(Tripulante tripulante) throws UnsupportedOperationException{
         this.estado.removerTripulante(tripulante);
     }
-
+    
+    public Tripulante procurarTripulante (String nome) {
+        Tripulante result = null;
+        for (Tripulante tripulante: tripulantes) {
+            if (tripulante.getNome().equals(nome)) {
+                result = tripulante;
+                break;
+            }
+        }
+        return result;
+    }
     public boolean estaCheio() {
         return this.aeronave.getQuantidadeDeAssentos() == this.tripulantes.size();
     }
