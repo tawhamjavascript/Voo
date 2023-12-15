@@ -1,17 +1,21 @@
 public class SimpleFactoryEstado {
 
-    public static Estado criarEstado(int tipoEstado, Voo voo) {
+    public static Estado criarEstado(int tipoEstado) {
         if (tipoEstado == 1) {
-            return new EstadoCancelado(voo);
+            return new EstadoCancelado();
         }
         else if(tipoEstado == 2) {
-            return new EstadoConfirmado(voo);
+            return new EstadoConfirmado();
         }
         else if (tipoEstado == 3) {
-            return new EstadoAtrasado(voo);
+            return new EstadoAtrasado();
         }
         else if (tipoEstado == 4) {
-            return new EstadoMudancaDePortao(voo);
+            return new EstadoMudancaDePortao();
+        }
+        else if (tipoEstado == 5){
+            return new EstadoFinalizado();
+
         }
         else {
             return null;

@@ -54,12 +54,16 @@ public class Voo {
 
     }
 
-    public void adicionarTripulante(Tripulante tripulante) throws UnsupportedOperationException{
+    public void adicionarTripulante(Tripulante tripulante) throws UnsupportedOperationException, AviaoCheioException{
         this.estado.adicionarTripulante(tripulante);
     }
 
-    public void removerTripulante(Tripulante tripulante) throws UnsupportedOperationException{
-        this.estado.removerTripulante(tripulante);
+    public void removerTripulante(String nome) throws UnsupportedOperationException, ObjectNotFound{
+        this.estado.removerTripulante(nome);
+    }
+
+    public void removerTripulante(Tripulante tripulante) {
+        this.tripulantes.remove(tripulante);
     }
     
     public Tripulante procurarTripulante (String nome) {

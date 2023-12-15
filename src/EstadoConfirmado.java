@@ -2,17 +2,17 @@ public class EstadoConfirmado implements Estado{
 
     private Voo voo;
 
-    public EstadoConfirmado (Voo voo) {
-        this.voo = voo;
-        voo.notificarTripulantes("O voo está confirmado");
+    public EstadoConfirmado () {
     }
 
     @Override
     public void trocarEstado(int tipoEstado) throws EstadoErradoException {
         // TODO Auto-generated method stub
-        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado, this.voo);
-        if (estado instanceof EstadoCancelado || estado instanceof EstadoAtrasado || estado instanceof EstadoMudancaDePortao) {
+        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado);
+        if (estado instanceof EstadoCancelado || estado instanceof EstadoAtrasado || estado instanceof EstadoMudancaDePortao || estado instanceof EstadoFinalizado) {
             voo.setEstado(estado);
+            estado.setVoo(voo);
+            estado.notificarTripulantes();
         }
         else {
             throw new EstadoErradoException();
@@ -26,7 +26,7 @@ public class EstadoConfirmado implements Estado{
     }
 
     @Override
-    public void removerTripulante(Tripulante tripulante) throws UnsupportedOperationException {
+    public void removerTripulante(String tripulante) throws UnsupportedOperationException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Estado confirmado não pode remover Tripulante");
     }
@@ -38,10 +38,15 @@ public class EstadoConfirmado implements Estado{
     }
 
     @Override
-    public void definirEscalaDoVoo(String partida, String chegada) throws UnsupportedOperationException {
+    public void setVoo(Voo voo) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Estado de confirmado não pode definir escala de voo");
+        this.voo = voo;
+
     }
 
-    
+    @Override
+    public void notificarTripulantes() {
+        voo.notificarTripulantes("O voo está confirmado");
+    }
+   
 }

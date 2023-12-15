@@ -1,17 +1,18 @@
 public class EstadoAtrasado implements Estado {
     private Voo voo;
 
-    public EstadoAtrasado (Voo voo) {
-        this.voo = voo;
-        this.voo.notificarTripulantes("O voo está atrasado");
+    public EstadoAtrasado () {
+        
     }
 
     @Override
     public void trocarEstado(int tipoEstado) throws EstadoErradoException{
         // TODO Auto-generated method stub
-        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado, this.voo);
-        if (estado instanceof EstadoConfirmado || estado instanceof EstadoCancelado) {
+        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado);
+        if (estado instanceof EstadoFinalizado || estado instanceof EstadoCancelado) {
             voo.setEstado(estado);
+            estado.setVoo(voo);
+            estado.notificarTripulantes();
         }
         else {
             throw new EstadoErradoException();
@@ -25,7 +26,7 @@ public class EstadoAtrasado implements Estado {
     }
 
     @Override
-    public void removerTripulante(Tripulante tripulante) throws UnsupportedOperationException{
+    public void removerTripulante(String tripulante) throws UnsupportedOperationException{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Estado de atrasado não pode remover um passageiro");
     }
@@ -37,10 +38,15 @@ public class EstadoAtrasado implements Estado {
     }
 
     @Override
-    public void definirEscalaDoVoo(String partida, String chegada) throws UnsupportedOperationException{
+    public void setVoo(Voo voo) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Estado de atrasado não pode mudar o horário do voo");
+        this.voo = voo;
     }
 
-    
+    @Override
+    public void notificarTripulantes() {
+        // TODO Auto-generated method stub
+
+        this.voo.notificarTripulantes("O voo está atrasado");
+   } 
 }

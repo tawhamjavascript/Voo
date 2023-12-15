@@ -7,6 +7,7 @@ public class Repositorio {
 
     
     private Repositorio() {
+        
         this.voos = new ArrayList<Voo>();
         
     }

@@ -2,13 +2,11 @@ public class EstadoCancelado implements Estado{
 
     private Voo voo;
 
-    public EstadoCancelado(Voo voo) {
-        this.voo = voo;
-        this.voo.notificarTripulantes("O voo está cancelado");
+    public EstadoCancelado() {
     }
-
-  
-
+    
+    
+    
     @Override
     public void trocarEstado(int tipoEstado) {
         // TODO Auto-generated method stub
@@ -22,7 +20,7 @@ public class EstadoCancelado implements Estado{
     }
 
     @Override
-    public void removerTripulante(Tripulante tripulante) {
+    public void removerTripulante(String tripulante) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Estado de cancelado não pode remover um passageiro");
     }
@@ -34,10 +32,16 @@ public class EstadoCancelado implements Estado{
     }
 
     @Override
-    public void definirEscalaDoVoo(String partida, String chegada) {
+    public void setVoo(Voo voo) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Estado de cancelado não pode mudar o horário do voo");
+        this.voo = voo;
+
     }
 
-    
+
+    @Override
+    public void notificarTripulantes() {
+        this.voo.notificarTripulantes("O voo está cancelado");
+
+    } 
 }

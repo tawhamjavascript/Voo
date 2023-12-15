@@ -11,9 +11,11 @@ public class EstadoProgramado implements Estado {
     @Override
     public void trocarEstado(int tipoEstado) throws EstadoErradoException {
         // TODO Auto-generated method stub
-        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado, this.voo);
+        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado);
         if (estado instanceof EstadoConfirmado) {
             voo.setEstado(estado);
+            estado.setVoo(voo);
+            estado.notificarTripulantes();
         }
         else {
             throw new EstadoErradoException();
@@ -21,16 +23,31 @@ public class EstadoProgramado implements Estado {
     }
 
     @Override
-    public void adicionarTripulante(Tripulante tripulante) throws UnsupportedOperationException {
+    public void adicionarTripulante(Tripulante tripulante) throws UnsupportedOperationException, AviaoCheioException {
         // TODO Auto-generated method stub
-        voo.addTripulante(tripulante);
+        if(!voo.estaCheio()) {
+            voo.addTripulante(tripulante);
+
+        }
+        else {
+            throw new AviaoCheioException();
+        }
+
     }
 
     @Override
-    public void removerTripulante(Tripulante tripulante) throws UnsupportedOperationException {
+    public void removerTripulante(String nome) throws UnsupportedOperationException, ObjectNotFound {
         // TODO Auto-generated method stub
-        List<Tripulante> tripulantes = voo.getTripulantes();
-        tripulantes.remove(tripulante);
+        Tripulante tripulante = this.voo.procurarTripulante(nome);
+
+        if (tripulante == null) {
+            throw new ObjectNotFound("Passageiro " + nome + " não encontrado");
+        }
+        else {
+            this.voo.removerTripulante(tripulante);
+        }
+
+
     }
 
     @Override
@@ -40,10 +57,14 @@ public class EstadoProgramado implements Estado {
     }
 
     @Override
-    public void definirEscalaDoVoo(String partida, String chegada) throws UnsupportedOperationException {
+    public void setVoo(Voo voo) {
         // TODO Auto-generated method stub
-       voo.setPrevisaoHorarioPartida(partida); 
-       voo.setPrevisaoHorarioChegada(chegada);
+        throw new UnsupportedOperationException("Unimplemented method 'setVoo'");
     }
-    
+
+    @Override
+    public void notificarTripulantes() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'notificarTripulantes'");
+    }  
 }

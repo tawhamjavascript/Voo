@@ -1,23 +1,21 @@
 public class EstadoMudancaDePortao implements Estado{
     private Voo voo;
 
-    public EstadoMudancaDePortao (Voo voo) {
-        this.voo = voo;
-        this.voo.notificarTripulantes("O voo mudou de portão");
-    }
-
+    
     @Override
     public void trocarEstado(int tipoEstado) throws EstadoErradoException{
         // TODO Auto-generated method stub
-        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado, this.voo);
-        if (estado instanceof EstadoConfirmado) {
+        Estado estado = SimpleFactoryEstado.criarEstado(tipoEstado);
+        if (estado instanceof EstadoFinalizado) {
             voo.setEstado(estado);
+            estado.setVoo(voo);
+            estado.notificarTripulantes();
         }
         else {
             throw new EstadoErradoException();
         }
     }
-
+    
     @Override
     public void adicionarTripulante(Tripulante tripulante) throws UnsupportedOperationException {
         // TODO Auto-generated method stub
@@ -25,7 +23,7 @@ public class EstadoMudancaDePortao implements Estado{
     }
 
     @Override
-    public void removerTripulante(Tripulante tripulante) throws UnsupportedOperationException {
+    public void removerTripulante(String tripulante) throws UnsupportedOperationException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Estado de Mudança de Portão não pode remover um passageiro");
     }
@@ -35,11 +33,18 @@ public class EstadoMudancaDePortao implements Estado{
         // TODO Auto-generated method stub
         voo.setPortaoDeEmbarque(portao);
     }
+    
+    @Override
+    public void setVoo(Voo voo) {
+        // TODO Auto-generated method stub
+        this.voo = voo;
+
+    }
 
     @Override
-    public void definirEscalaDoVoo(String partida, String chegada) throws UnsupportedOperationException {
+    public void notificarTripulantes() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'definirEscalaDoVoo'");
+        this.voo.notificarTripulantes("O voo mudou de portão");
+
     }
-    
 }
