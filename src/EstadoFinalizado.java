@@ -34,12 +34,5 @@ public class EstadoFinalizado implements Estado {
     
     
     
-    @Override
-    public void notificarTripulantes() {
-        // TODO Auto-generated method stub
-        this.voo.notificarTripulantes("O voo partiu para o destino");
-        
-
-    }
     
 }

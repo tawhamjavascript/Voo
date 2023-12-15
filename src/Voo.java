@@ -3,26 +3,25 @@ import java.util.List;
 
 public class Voo {
 
-    public String id;
+    private String id;
 
-    public List<Tripulante> tripulantes = new ArrayList<Tripulante>();
+    private List<Tripulante> tripulantes = new ArrayList<Tripulante>();
 
-    public Estado estado;
+    private Estado estado;
 
-    public String aeroportoDeOrigem;
+    private String aeroportoDeOrigem;
 
-    public String aeroportoDeDestino;
+    private String aeroportoDeDestino;
 
-    public String data;
+    private String data;
 
-    public String previsaoHorarioPartida;
+    private String previsaoHorarioPartida;
 
-    public String previsaoHorarioChegada;
+    private String previsaoHorarioChegada;
 
-    public String portaoDeEmbarque;
+    private String portaoDeEmbarque;
 
-    public Aeronave aeronave;
-
+    private Aeronave aeronave;
 
 
     public Voo(String id, String aeroportoDeOrigem, String aeroportoDeDestino, String data,
@@ -43,6 +42,8 @@ public class Voo {
     public void notificarTripulantes(String message) {
         this.tripulantes.forEach((tripulante) -> tripulante.notificar(message));
     }
+
+
 
     public void mudarEstado(int tipoEstado) throws EstadoErradoException {
         try {

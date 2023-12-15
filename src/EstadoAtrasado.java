@@ -12,7 +12,6 @@ public class EstadoAtrasado implements Estado {
         if (estado instanceof EstadoFinalizado || estado instanceof EstadoCancelado) {
             voo.setEstado(estado);
             estado.setVoo(voo);
-            estado.notificarTripulantes();
         }
         else {
             throw new EstadoErradoException();
@@ -43,10 +42,5 @@ public class EstadoAtrasado implements Estado {
         this.voo = voo;
     }
 
-    @Override
-    public void notificarTripulantes() {
-        // TODO Auto-generated method stub
-
-        this.voo.notificarTripulantes("O voo está atrasado");
-   } 
+    
 }

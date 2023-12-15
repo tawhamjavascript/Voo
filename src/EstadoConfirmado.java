@@ -12,7 +12,7 @@ public class EstadoConfirmado implements Estado{
         if (estado instanceof EstadoCancelado || estado instanceof EstadoAtrasado || estado instanceof EstadoMudancaDePortao || estado instanceof EstadoFinalizado) {
             voo.setEstado(estado);
             estado.setVoo(voo);
-            estado.notificarTripulantes();
+
         }
         else {
             throw new EstadoErradoException();
@@ -44,9 +44,5 @@ public class EstadoConfirmado implements Estado{
 
     }
 
-    @Override
-    public void notificarTripulantes() {
-        voo.notificarTripulantes("O voo está confirmado");
-    }
    
 }

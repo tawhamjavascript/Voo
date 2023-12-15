@@ -12,7 +12,9 @@ public interface Estado {
 
     public void setVoo(Voo voo);
 
-    public void notificarTripulantes();
+
+
+
 
 
 

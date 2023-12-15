@@ -1,4 +1,4 @@
-import java.util.List;
+
 
 public class EstadoProgramado implements Estado {
 
@@ -15,7 +15,7 @@ public class EstadoProgramado implements Estado {
         if (estado instanceof EstadoConfirmado) {
             voo.setEstado(estado);
             estado.setVoo(voo);
-            estado.notificarTripulantes();
+
         }
         else {
             throw new EstadoErradoException();
@@ -46,8 +46,6 @@ public class EstadoProgramado implements Estado {
         else {
             this.voo.removerTripulante(tripulante);
         }
-
-
     }
 
     @Override
@@ -62,9 +60,4 @@ public class EstadoProgramado implements Estado {
         throw new UnsupportedOperationException("Unimplemented method 'setVoo'");
     }
 
-    @Override
-    public void notificarTripulantes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notificarTripulantes'");
-    }  
 }

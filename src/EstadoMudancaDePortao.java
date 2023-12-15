@@ -9,7 +9,7 @@ public class EstadoMudancaDePortao implements Estado{
         if (estado instanceof EstadoFinalizado) {
             voo.setEstado(estado);
             estado.setVoo(voo);
-            estado.notificarTripulantes();
+
         }
         else {
             throw new EstadoErradoException();
@@ -41,10 +41,4 @@ public class EstadoMudancaDePortao implements Estado{
 
     }
 
-    @Override
-    public void notificarTripulantes() {
-        // TODO Auto-generated method stub
-        this.voo.notificarTripulantes("O voo mudou de portão");
-
-    }
 }

@@ -38,10 +38,5 @@ public class EstadoCancelado implements Estado{
 
     }
 
-
-    @Override
-    public void notificarTripulantes() {
-        this.voo.notificarTripulantes("O voo está cancelado");
-
-    } 
+ 
 }
